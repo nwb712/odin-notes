@@ -293,3 +293,44 @@ This method is not reccommended for the following reasons:
     - The descendant combinator allows one to specify a rule for an element which is the descendant or child of another element; this is done by putting a space between the selectors.
 6. Between a rule that uses one class selector and a rule that uses three type selectors, which rule has the higher specificity?
     - A class selector will always have higher specificity than any number of type selectors.
+
+## Inspecting HTML And CSS
+This lesson is a walkthrough of the Chrome Dev Tools, which allow one to see detailed information about HTML elements, CSS rules, and code.
+
+### The Inspector
+To open the inspector you can right click any element and click inspect, or hit the F12 key.
+
+### Inspecting Elements
+In the elements pane, you can see the entire HTML structure of the page. You can click any specific element to select or use the blue icon hover any element on the page.
+
+When an element is selcted, the styles tab shows any currently applied styles as well as any that are being overwritted (indicated by a strikethrough).
+
+### Testing Styles in the Inspector
+The styles pane also allows editing styles directly in the browser. The webpage will update the changes in real time, but the source of the page will not be affected. 
+This is useful for quickly testing out attributes and values.
+
+### Assignment: Chrome Dev Tools Docs
+
+#### Overview
+- Device Mode: Simulate Mobile Devices
+- Elements Panel and CSS: View and change the DOM and CSS
+- Console Panel: View messages and run JavaScript from the Console
+- Sources Panel: Debug JavaScript, presist changes made in DevTools across page reloads, save and run JavaScript snippets, save changes made in DevTools to disk.
+- Network Panel: View and debug network activity
+- Recorder Panel: Record, replay, and measure user flows
+- Performance Panel: Find ways to improve load and runtime performance
+- Memory Panel
+- Application Panel: Inspect all resources that are loaded, included IndexedDB or Web SQL databases, local and session storage, cookies, Application Cache, images, fonts, and stylesheets.
+- Security Panel: Debug mixed content issues, certificate problems, and more.
+
+#### Open Chrome Dev Tools
+- Dev tools shortcuts:
+    - Elements: Ctrl + Shift + C
+    - Console: Ctrl + Shift + J
+    - Your Last Panel: Ctrl + Shift + I
+- Auto-open DevTool on every new tab:
+    - Quit any running chrome instance
+    - Use `google-chrome --auto-open-devtools-for-tabs`
+
+### Knowledge Check
+
