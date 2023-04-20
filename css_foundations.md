@@ -333,4 +333,170 @@ This is useful for quickly testing out attributes and values.
     - Use `google-chrome --auto-open-devtools-for-tabs`
 
 ### Knowledge Check
+1. How do you select a specific element on your page with your browser's developer tools?
+    - You can select a specific element either by clicking on it in the HTML tree or using the select tool to click the element directly on the webpage.
+2. What does a strikethrough in a CSS declaration mean in your browser's developer tools?
+    - The strikethrough means that the declaration is being overwritten by another with higher specificity.
+3. How do you change CSS in real time on specifc elemements of a web page with your browser's developer tools?
+    - Select the element and add a new CSS rule.
+
+## The Box Model
+The most important skills to master with CSS are positioning and layout. 
+
+Every thing on a webpage is a rectangular box. Layout involves deciding how to nest and stack these boxes. You can manipulate the size of these boxes using:
+- `padding` increases the space between the border of the box and the content of the box.
+- `margin` increases the space between the borders of a box and the borders of adjacent boxes. `margin` can be shared between adjacent elements.
+- `border` adds space between the margin and the padding
+
+### Reading: MDN - The Box Model
+
+#### Block and inline boxes
+In CSS there are several types of boxes that generally fit into the categories of block boxes and inline boxes. 
+This refers to how the box behaves in terms of page flow and in relation to other boxes on the page. Boxes have an inner display type and an outer display type. 
+
+#### Outer Display Type
+If a box has an outer display type of `block`, then:
+- The box will break onto a new line
+- The `width` and `height` properties are respected.
+- Padding, margin, and border will cause other elements to be pushed away from the box.
+- If `width` is not specified, the box will expand in the inline direction to fill the space available in its container. In most cases will become as wide as the container
+Some HTML elements, such as `<h1>`, and `<p>`, use `block` as their outer display type by default.
+
+If a box has an outer display type of `inline`, then:
+- The box will not break onto a new line.
+- The `width` and `height` properties will not apply.
+- Top and bottom padding, margins, and borders will apply but will not cause other inline boxes to move away from the box.
+- Left and right padding, margins, and brders will apply and will cause other inline boxes to move away from the box. 
+Some HTML elements, such as `<a>`, `<span>`, `<em>` and `<strong>` use `inline` as their outer display type by default.
+
+#### Inner Display Type
+Boxes also have an inner display type, which dictates how elements inside that box are laid out.
+
+Block and inline laout is the default way things behave on the web. By default, the elements inside a box are also laid out in normal flow and behave as block or inline boxes.
+
+You can change the inner display type by, for example, setting `display: flex;`. The element will still use outer display type `block`, but the inner display type will be `flex`. 
+- Direct children of this box will become flex items and behave according to the Flexbox specification. 
+
+`flex` will be encountered later as will other inner values such as `grid`.
+
+#### What is the CSS box model?
+The CSS box model as a while applies to block boxes and defines how the different parts of a box, margin, border, padding, and content work together to create a box you can see on the page. 
+
+##### Parts of a box
+Making up a block box in CSS we have the:
+- Content Box: The area where content is displayed using properties like `inline-size` and `block-size` or `width` and `height`.
+- Padding Box: The padding sits around the content as white space; sized using `padding` and related properties
+- Border Box: The border box wraps the content and any padding; sized using `border` and related properties.
+- Margin Box: Te margin wraps the content, padding, and border as whitespace between this box and other elements; sized using `margin` and related properties.
+
+##### The standard CSS Box Model
+In the standard box model, if you give a box an `inline-size` and a `block-size` (or `width` and `height`) attributes, this defines the inline-size and the block-size. 
+Any padding and border is then added to those dimensions to get the total size taken up by the box. For example:
+```css
+.box {
+    width: 350px;
+    height: 150px;
+    margin: 10px;
+    padding: 25px;
+    border: 5px solid black;
+}
+```
+The actual space taken up by the box will be 410px wide (350 + 25 + 25 + 5 + 5) and 210px high (150 + 25 + 25 + 5 + 5). Note that the margin is not counted towards the actual size of the box. 
+
+##### The alternative CSS box model
+In the alternative box model, any width is the width of the visible box on the page. The content area width is that width minus the width for the padding and the border. 
+
+To turn on this model for an element, set `box-sizing: border-box`  on it:
+```css
+.box {
+    box-sizing: border-box;
+}
+```
+If you assume the box has the same CSS as above, the actual space taken up will now be 350px in the inline direction, and 150px in the block direction. 
+
+To use the alternative box model for all your elements, set the `box-sizing` property of the `<html>` elements and set all other elements to inherit that value. 
+```css
+html {
+    box-sizing: border-box;
+}
+*,
+*::before,
+*::after, {
+    box-sizing: inherit;
+}
+```
+
+#### Margins, padding, and borders
+
+##### Margin
+The margin is an invisible space around your box which pushes other elements away. It can have positive or negative values. Setting a negative value to a margin can cause an element to overlap other things on the page. 
+The margin is always added after the size of the visible box has been calculated.
+
+All margins of an element can be changed at once with the `margin` property, or each side individually using:
+- `margin-top`
+- `margin-bottom`
+- `margin-left`
+- `margin-right`
+
+###### Margin collapsing
+Two elements will behave differently depending on whether margin values are positive or negative:
+- Two positive margins will combine to become one margin. Its size will be equal to the largest individual margin.
+- Two negative margins will collapse and the smallest (furthest from zero) value will be used. 
+- If one margin is negative, its value will be subtracted from the total. 
+
+##### Borders
+The border is drawn between the margin and the padding of a box. If you are using the standard box model, the size of the border is added to the `width` and `height` of the content box. 
+If you are using the alternative model the size of the border makes the content box smaller as it takes up some of the available `width` and `height` of the element box.
+
+You can set the width, style, or color of all four borders at once using the `border` property.
+
+To set properties of each border individually:
+- `border-top`
+- `border-right`
+- `border-bottom`
+- `border-left`
+
+To set the width, style, or color of all sides:
+- `border-width`
+- `border-style`
+- `border-color`
+
+To set the width, style, or color of a single side:
+- `border-<side>-<property>`
+
+##### Padding
+The padding sits between the border and the content area, and is used to push the content away from the border. Unlike margins, you cannot have negative padding. 
+
+The `padding` property controls the padding on all sides; individually use:
+- `padding-top`
+- `padding-right`
+- `padding-bottom`
+- `padding-left`
+
+#### The box model and inline boxes
+All of the above applies to block boxes. Some properties also apply to inline boxes too.
+
+The top and bottom margin, padding, and border are respected, but don't change the relationship of other content to inline boxes. 
+The left and right padding, margins, and borders move other content away from the box. 
+
+#### Using display: inline-block
+`display: inline-block;` is a special value of `display` which provides a middle ground between `inline` and `block`. 
+Use if you do not want an item to break onto a new line, but do want it to respect `width` and `height`, and avoid overlapping. 
+
+This can be useful, for example, to give a link a larger hit are by adding `padding` `<a>` is and inline element like `<span>`; 
+you can use `display: inline-block` to allow padding to be set and make it easier for a user to click the link. 
+
+### Knowledge Check
+1. From inside to outside, what is the order of box-model properties?
+    - From inside to outside: content, padding, border, margin
+2. What does the `box-sizing` CSS property do?
+    - Used to change to box model of the element
+3. What is the difference between the standard and alternative box model?
+    - In the standard model, the padding and border are added to height and width. In the alternative model, the padding and border are subtracted from the content box without changing height and width. 
+4. Would you use `margin` or `padding` to create more space between two elements?
+    - You would use margin to create space between two elements.
+5. Would you use `margin` or `padding` to create more space between the contents of an elements and its border?
+    - You would use padding to create space between the contents of an element and its border.
+6. Would you use `margin` or `padding` if you wanted two elements to overlap each other? 
+    - You would use a negative value for margin if you wanted two elements to overlap eachother. 
 
