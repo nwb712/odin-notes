@@ -500,3 +500,47 @@ you can use `display: inline-block` to allow padding to be set and make it easie
 6. Would you use `margin` or `padding` if you wanted two elements to overlap each other? 
     - You would use a negative value for margin if you wanted two elements to overlap eachother. 
 
+## Block and Inline
+
+### Block vs. Inline
+Most elements are block elements with `display: block`. By default, block elements will appear on the page stacked atop eachother, each element starting on a new line.
+
+Inline elements do not start on a new line; instead they appear in line with whatever elements they are placed beside. 
+
+Inline-block elements behave like inline elements, but with block-style padding and margin.
+
+### Divs and Spans
+`<div>` and `<span>` do not add any meaning to their content. However, divs are block elements by default, while spans are inline elements. 
+These elements are mostly used as container elements to group other elements.
+
+### MDN - Normal Flow
+
+#### How are elements laid out by default?
+By default, a block level element's content fill the available inline space of the parent element containing it and the element grows along the block dimension to accommodate its content. 
+The size of inline elements is just the size of their content. You can't set width or height on inline elements except images. Images can be resized without chaning their display property. 
+
+The normal layout flow is the system by which elements are placed inside the browser's viewport. By default block elements are laid out in the block flow direction, which is based on the parent's writing mode (initial: horizontal-tb). 
+Each element will apear on a new line below the last one, with each one separated by whatever margin that's been specified. In English, for example, block-level elements are laid out vertically. 
+
+Inline elements instead all sit on the same line along with any adjacent (or wrapped) text content as long as there is space for them to do so inside the width of the parent block level element. 
+If there isn't space, then the overflowing content will move down to a new line. 
+
+If two vertically adjacent elements both have a margin set on them and their margins touch, the larger of the two margins remains and the smaller one disappears. This is known a margin collapsing. 
+
+### Inline vs Inline-Block Display in CSS
+`display: inline-block` works like an inline element, but also allows setting width and height, and top and bottom margins and paddings are respected. 
+
+### Knowledge Check
+1. What is the difference between a block element and an inline element?
+    - A block element is laid out in block flow directions with each element on its own line, while inline elements are not on their own line and vertical padding/border are not respected by the surrounding content.
+2. What is the difference between an inline element and an inline block element?
+    - An inline block element works like an inline element but allows setting width and height; also top and bottom margins are respected.
+3. Is an `<h1>` block or inline?
+    - h1 is a block
+4. Is `<button>` block or inline?
+    - button is inline
+5. Is `<div>` block or inline?
+    - div is a block
+6. Is `<span>` block or inline?
+    - span is inline
+    
